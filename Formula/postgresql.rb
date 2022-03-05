@@ -48,9 +48,9 @@ class Postgresql < Formula
     args = %W[
       --disable-debug
       --prefix=#{prefix}
-      --datadir=#{HOMEBREW_PREFIX}/share/postgresql
-      --libdir=#{HOMEBREW_PREFIX}/lib
-      --includedir=#{HOMEBREW_PREFIX}/include
+      --datadir=/usr/local/share/postgresql
+      --libdir=/usr/local/lib
+      --includedir=/usr/local/include
       --sysconfdir=#{etc}
       --docdir=#{doc}
       --enable-thread-safety
@@ -136,8 +136,8 @@ class Postgresql < Formula
 
   test do
     system "#{bin}/initdb", testpath/"test" unless ENV["HOMEBREW_GITHUB_ACTIONS"]
-    assert_equal "#{HOMEBREW_PREFIX}/share/postgresql", shell_output("#{bin}/pg_config --sharedir").chomp
-    assert_equal "#{HOMEBREW_PREFIX}/lib", shell_output("#{bin}/pg_config --libdir").chomp
-    assert_equal "#{HOMEBREW_PREFIX}/lib/postgresql", shell_output("#{bin}/pg_config --pkglibdir").chomp
+    assert_equal "/usr/local/share/postgresql", shell_output("#{bin}/pg_config --sharedir").chomp
+    assert_equal "/usr/local/lib", shell_output("#{bin}/pg_config --libdir").chomp
+    assert_equal "/usr/local/lib/postgresql", shell_output("#{bin}/pg_config --pkglibdir").chomp
   end
 end
